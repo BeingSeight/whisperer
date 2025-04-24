@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Whisperer – Transcribe Audio with Hugging Face Whisper API**
+[Try Whisperer Live](https://your-vercel-app.vercel.app)
 
-## Getting Started
+---
+## Overview:
+<img width="1408" alt="Screenshot 2025-04-25 at 4 54 49 AM" src="https://github.com/user-attachments/assets/40d5b426-316a-48ca-bf48-e4c075856fd8" />
 
-First, run the development server:
 
+---
+[GitHub Repository Link](https://github.com/BeingSeight/whisperer)
+
+## **Introduction**
+
+Welcome to **Whisperer**! This lightweight app lets you upload audio files and get back text transcriptions with zero local models—leveraging the free Hugging Face Whisper Inference API. No signup, no heavy downloads, just a simple, privacy-preserving transcription bot built with Next.js, TypeScript, and Tailwind CSS.
+
+---
+
+## **Features**
+
+- **Effortless Transcription**: Upload `.wav` or `.mp3` files and get text back instantly.  
+- **No Local Models**: Uses Hugging Face’s hosted Whisper, so no need to download gigabytes of data.  
+- **Privacy-Friendly**: No user accounts or data storage—your audio and text stay in your session.  
+- **Modern Stack**: Built with Next.js App Router, TypeScript for safety, and Tailwind CSS for styling.  
+- **Easy Deployment**: Deployed on Vercel with a single command.
+
+---
+
+## **How It Works**
+
+1. **Frontend**  
+   - Built using **Next.js**, **TypeScript**, and **Tailwind CSS**.  
+   - Presents a file picker and displays the returned transcription in a clean UI.  
+2. **API Route**  
+   - Receives the uploaded file in `src/app/api/transcribe/route.ts`.  
+   - Calls the **Hugging Face Whisper API** (`openai/whisper-small`) with your token.  
+   - Returns `{ text: "..." }` JSON to the frontend.  
+3. **No Centralized Storage**  
+   - No database or persistent storage—each request is ephemeral and privacy-first.  
+4. **Deployment**  
+   - Hosted on **Vercel**, leveraging serverless functions for the API route.
+
+---
+
+## **Tech Stack**
+
+- **Next.js**: Framework for React apps with built-in API routes.  
+- **TypeScript**: Strongly-typed code for reliability and auto-completion.  
+- **Tailwind CSS**: Utility-first CSS for rapid styling.  
+- **Hugging Face Whisper API**: Free hosted inference for speech-to-text.  
+- **Vercel**: Zero-config deployment and global CDN.
+
+---
+
+## **How I Built It**
+
+1. **Project Setup**  
+   - `npx create-next-app@latest` with TypeScript, Tailwind, App Router.  
+   - Installed `dotenv` to manage the API token.  
+2. **Layout & Styling**  
+   - Configured `globals.css`, `tailwind.config.js`, and the Inter font in `layout.tsx`.  
+3. **Frontend Development**  
+   - Created `src/app/page.tsx` with a file input, upload button, and result box.  
+   - Used React hooks (`useState`) and client-side rendering (`'use client'`).  
+4. **API Integration**  
+   - Added `src/app/api/transcribe/route.ts`.  
+   - Fetched audio bytes and forwarded to `https://api-inference.huggingface.co/models/openai/whisper-small`.  
+   - Returned transcription JSON.  
+5. **Testing & Deployment**  
+   - Tested locally with `npm run dev`.  
+   - Pushed to GitHub and deployed on Vercel, setting `HF_API_TOKEN` in environment variables.
+
+---
+
+## **Why This Project Stands Out**
+
+Whisperer demonstrates how to build a **serverless**, **privacy-first** transcription service without incurring hosting costs for large models. By leveraging Hugging Face’s community inference endpoints, users enjoy high-quality speech-to-text without any local resource burden.
+
+---
+
+## **Installation & Setup**
+
+To run Whisperer locally:
+
+1. **Clone** the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/BeingSeight/whisperer.git
+  cd whisperer
 ```
+2. Install dependencies:
+```bash
+  npm install
+```
+3. Configure your Hugging Face token:
+Create .env.local:
+``` env
+  HF_API_TOKEN="hf_your_token_here"
+```
+4. Start the development server:
+``` bash
+  npm run dev
+```
+5. Open http://localhost:3000 in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
+## Deployment
+1. Commit all changes (exclude .env.local) and push to GitHub.
+2. Add the HF_API_TOKEN env var in your Vercel project settings.
+3. Deploy—Vercel will build and serve your app, with the API route calling Hugging Face.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
+## Acknowledgments
+Hugging Face for providing free inference endpoints for Whisper models.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Next.js, TypeScript, and Tailwind CSS for an amazing developer experience.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Feel free to explore, fork, and contribute!
